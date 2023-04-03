@@ -1,4 +1,3 @@
-import { useRouter } from "next/router";
 import Header from "@/components/Header";
 import PromptInput from "@/components/PromptInput";
 import "../styles/global.css";

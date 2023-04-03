@@ -25,16 +25,16 @@ function Header() {
                     </h2>
                 </div>
             </div>
-            <div className="flex text-xs md:text-base divide-x items-center text-grey-500">
+            <div className="flex text-base md:text-lg divide-x items-center text-grey-500">
                 <Link
                     href="/about"
-                    className="px-2 font-light text-right"
+                    className="px-2 font-light text-right hover:text-violet-500"
                 >
                     About
                 </Link>
                 <Link
                     href="https://github.com/jakubfronczyk/ai-powered-image-generator"
-                    className="px-2 font-light text-right"
+                    className="px-2 font-light text-right hover:text-violet-500"
                 >
                     Github Repo
                 </Link>

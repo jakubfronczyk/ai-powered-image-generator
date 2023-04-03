@@ -1,15 +1,34 @@
 "use client";
 
+import fetchSuggestionFromChatGPT from "../lib/fetchSuggestionFromChatGPT";
 import { useState } from "react";
+import useSWR from "swr";
 
 const PromptInput = () => {
     const [input, setInput] = useState("");
+
+    const {
+        data: suggestion,
+        isLoading,
+        mutate,
+        isValidating,
+    } = useSWR("/api/suggestion", fetchSuggestionFromChatGPT, {
+        revalidateOnFocus: false,
+    });
+    console.log(suggestion);
+    // const loading = isLoading || isValidating;
+
     return (
         <div className="m-10">
             <form className="flex flex-col md:flex-row shadow-md shadow-slate-400/10 border rounded-md lg:divide-x">
                 <textarea
+                    value={input}
+                    onChange={(e) => setInput(e.target.value)}
                     className="flex-1 p-4 outline-none"
-                    placeholder="Enter a prompt..."
+                    placeholder={
+                        // (loading && "ChatGPT is thinking of a suggestion...") ||
+                        suggestion || "Enter a prompt..."
+                    }
                 />
                 <button
                     className={`p-4 ${
@@ -35,6 +54,14 @@ const PromptInput = () => {
                     New Suggestion
                 </button>
             </form>
+            {/* {input && (
+                <p className="italic pt-2 pl-2 font-light">
+                    Suggestion:{" "}
+                    <span className="text-violet-500">
+                        {loading ? "ChatGPT is thinking..." : suggestion}
+                    </span>
+                </p>
+            )} */}
         </div>
     );
 };
